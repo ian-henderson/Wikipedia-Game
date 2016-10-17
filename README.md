@@ -1,5 +1,5 @@
 # Wikipedia-Game
-The wikipedia_game() function uses a non-recursive breadth-first search algorithm to find the shortest path between two Wikipedia pages. The root and target arguments must be the exact titles of the desired pages. 
+The wikipedia_game() function uses a non-recursive breadth-first search algorithm to find the shortest path between two Wikipedia pages. The page titles must be the exact titles of the Wikipedia pages. 
 
 ## Requirements
 1. Python3
