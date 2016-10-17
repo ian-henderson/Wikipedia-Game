@@ -6,6 +6,6 @@ The `wikipedia_game(root, target)` function uses a non-recursive breadth-first s
 2. virtualenv
 
 ## Setup
-1. Set up a `Python3` virtual environment with `virtualenv` using the command `virtualenv example_environment --python='python3'`.
-2. Activate the `virtualenv` environment with the command `source example_environment/bin/activate`.
+1. Set up a Python3 virtual environment with `virtualenv` using the command `virtualenv wiki_env --python='python3'`.
+2. Activate the `virtualenv` environment with the command `source wiki_env/bin/activate`.
 3. Install the dependencies with `pip install -r requirements.txt`.
