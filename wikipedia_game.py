@@ -1,4 +1,4 @@
-import os, wikipedia
+import os, sys, wikipedia
 
 
 def print_path(data):
@@ -8,14 +8,31 @@ def print_path(data):
     print(data['title'], end='')
 
 
+def get_selection(selection):
+    page = None
+    while not page:
+        try:
+            entry = input('%s page title: ' % selection)
+            page = wikipedia.page(entry)
+        except wikipedia.exceptions.DisambiguationError as e:
+            print('\nDisambiguation Selection (Choose one of these or use another term)')
+            for option in e.options:
+                print('\t' + option)
+            print()
+        except wikipedia.exceptions.PageError as e:
+            print('Page error, try again.')
+        except KeyboardInterrupt:
+            print('Exiting')
+            sys.exit()
+    return page
+
+
 # Non-recursive Breadth-first Search Implementation
 def wikipedia_game():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('Wikipedia Game\n\n')
-    root = input('Start page title: ')
-    root_page = wikipedia.page(root)
-    target = input('Target page title: ')
-    target_page = wikipedia.page(target)
+    root_page = get_selection('Root')
+    target_page = get_selection('Target')
     G = {}
     G[root_page.title] = {
         'title': root_page.title,
@@ -42,7 +59,7 @@ def wikipedia_game():
                         print('Path: ', end='')
                         print_path(G[link])
                         print()
-                        return
+                        sys.exit()
                     Q.append(G[link])
         except wikipedia.exceptions.DisambiguationError as e:
             # Disambiguation Page
@@ -64,14 +81,14 @@ def wikipedia_game():
                         print('Path: ', end='')
                         print_path(G[option])
                         print()
-                        return
+                        sys.exit()
                     Q.append(G[option])
         except wikipedia.exceptions.PageError as e:
             # Skips over the item in the queue if it results in a page error.
             print('\tSkipping %s...\n\t\t%s' % (current['title'], e))
         except KeyboardInterrupt:
             print('Exiting')
-            return
+            sys.exit()
 
 
 wikipedia_game()
