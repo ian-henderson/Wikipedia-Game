@@ -1,13 +1,21 @@
 import os, wikipedia
 
 
+def print_path(data):
+    if data['parent']:
+        print_path(data['parent'])
+        print(' => ', end='')
+    print(data['title'], end='')
+
+
 # Non-recursive Breadth-first Search Implementation
 def wikipedia_game():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Wikipedia Game\n\n")
     root = input("Start page title: ")
-    target = input("Target page title: ")
     root_page = wikipedia.page(root)
+    target = input("Target page title: ")
+    target_page = wikipedia.page(target)
     G = {}
     G[root_page.title] = {
         'title': root_page.title,
@@ -29,13 +37,13 @@ def wikipedia_game():
                         'distance': current['distance'] + 1,
                         'parent': current
                     }
-                    if link == target:
-                        print("\tFound %s!\n\t\tData: %s" % (link, G[link]))
+                    if link == target_page.title:
+                        print('\n%s found!' % link)
+                        print('Path: ', end='')
+                        print_path(G[link])
+                        print()
                         return
                     Q.append(G[link])
-        except wikipedia.exceptions.PageError as e:
-            # Skips over the item in the queue if it results in a page error.
-            print("\tSkipping %s...\n\t\t%s" % (current['title'], e))
         except wikipedia.exceptions.DisambiguationError as e:
             # Disambiguation Page
             G[e.title] = {
@@ -51,10 +59,16 @@ def wikipedia_game():
                         'distance': current['distance'] + 2,
                         'parent': G[e.title] 
                     }
-                    if option == target:
-                        print("\tFound %s!\n\t\tData: %s" % (option, G[option]))
+                    if option == target_page.title:
+                        print('\n%s found!' % option)
+                        print('Path: ', end='')
+                        print_path(G[option])
+                        print()
                         return
                     Q.append(G[option])
+        except wikipedia.exceptions.PageError as e:
+            # Skips over the item in the queue if it results in a page error.
+            print("\tSkipping %s...\n\t\t%s" % (current['title'], e))
         except KeyboardInterrupt:
             print("Exiting")
             return
