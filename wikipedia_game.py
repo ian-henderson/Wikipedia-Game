@@ -40,7 +40,7 @@ def wikipedia_game():
         'parent': None
     }
     Q = [G[root_page.title]]
-    print('\nParsing Wikipedia...')
+    print('\nFinding the path between the %s and %s pages...' %(root_page.title, target_page.title))
     while Q:
         current = Q[0]
         Q = Q[1:]
