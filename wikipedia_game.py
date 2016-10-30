@@ -8,7 +8,7 @@ def print_path(data):
     print(data['title'], end='')
 
 
-def get_selection(selection):
+def get_page(selection):
     page = None
     while not page:
         try:
@@ -31,8 +31,8 @@ def get_selection(selection):
 def wikipedia_game():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('Wikipedia Game\n\n')
-    root_page = get_selection('Root')
-    target_page = get_selection('Target')
+    root_page = get_page('Root')
+    target_page = get_page('Target')
     G = {}
     G[root_page.title] = {
         'title': root_page.title,
