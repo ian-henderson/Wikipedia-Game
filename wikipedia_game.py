@@ -27,8 +27,8 @@ def get_page(selection):
     return page
 
 
-# Non-recursive Breadth-first Search Implementation
 def wikipedia_game():
+    # Clears up the screen on start.
     os.system('cls' if os.name == 'nt' else 'clear')
     print('Wikipedia Game\n\n')
     root_page = get_page('Root')
@@ -74,7 +74,7 @@ def wikipedia_game():
                     G[option] = {
                         'title': option,
                         'distance': current['distance'] + 2,
-                        'parent': G[e.title] 
+                        'parent': G[e.title]
                     }
                     if option == target_page.title:
                         print('\n%s found!' % option)
