@@ -4,6 +4,7 @@
 ** Requirements
    1. Python3
    2. virtualenv
+   3. Sup
 
 ** Setup
    1. Set up a Python3 virtual environment with virtualenv using the command `virtualenv wiki_env --python='python3'`.
